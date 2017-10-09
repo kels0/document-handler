@@ -1,0 +1,31 @@
+<div class="btn-group">
+    <button type="button" class="btn btn-default active" (click)="getPeriodData('1')">Yesterday</button>
+    <button type="button" class="btn btn-default" (click)="getPeriodData('30')">Last 30 days</button>
+    <button type="button" class="btn btn-default" (click)="getPeriodDataThisMonth()">This Month</button>
+    <button type="button" class="btn btn-default" (click)="getPeriodDataByDate(24, 6)">Since Midsummer</button>
+</div>
+<div class="row top-dashboard">
+    <div class="col-lg-6">
+        <div class="top-list">
+            <h3>Top 3: {{period}}</h3>
+            <div class="station-top-list" *ngFor="let station of stations | orderBy: ['-seconds']; let i=index">
+                <div class="row" *ngIf="i<3">
+                    <h2 class="col-lg-1">{{i + 1}}.</h2>
+                    <div class="col-lg-11 station-card top-card" (click)="openDetails(station)">
+                        <station-card [station]="station"></station-card>
+                    </div>
+                </div>
+            </div>
+            <h3>Bottom 3: {{period}}</h3>
+            <div class="station-bottom-list" *ngFor="let station of stations | orderBy: ['seconds']; let i=index">
+                <div class="row" *ngIf="i<3">
+                    <h2 class="col-lg-1">{{i + 1}}.</h2>
+                    <div class="col-lg-11 station-card" (click)="openDetails(station)">
+                        <station-card [station]="station"></station-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <station-details class="col-lg-6" [station]="selectedStation"></station-details>
+</div>

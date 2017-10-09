@@ -1,0 +1,17 @@
+<div class="dashboard">
+    <top-bar (changeCurrentPage)="changePage($event)"></top-bar>
+    <div [ngSwitch]="page">
+        <div *ngSwitchCase="'top'">
+            <sun-top></sun-top>
+        </div>
+        <div *ngSwitchCase="'liga'">
+            <sun-league></sun-league>
+        </div>
+        <div *ngSwitchCase="'how'">
+            <author-page></author-page>
+        </div>
+        <div *ngSwitchDefault>
+            <sun-top></sun-top>
+        </div>
+    </div>
+</div>
