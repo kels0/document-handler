@@ -1,4 +1,5 @@
 import {Component, Input, Output, EventEmitter} from "@angular/core";
+import {HttpService} from ".././services/http.service";
 
 interface IMenuNames {
     name: string;
@@ -15,16 +16,15 @@ export class TopbarComponent {
     @Output() changeCurrentPage: EventEmitter<any> = new EventEmitter();
     public buttons: IMenuNames[];
 
-    constructor(
+    constructor(private httpService: HttpService
     ) {
         this.buttons = [
-            { name: "Top places with sun", value: "top" },
-            { name: "Sun league", value: "liga" },
-            { name: "How was this made?", value: "how" },
+            { name: "Contracts", value: "contract" },
+            { name: "Insurance", value: "insurance" },
+            { name: "Receipts", value: "receipt" },
         ];
     }
     public updatePage(value: string) {
         this.changeCurrentPage.emit(value);
     }
-
 }

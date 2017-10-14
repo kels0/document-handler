@@ -7,14 +7,14 @@ export class HttpService {
 
   constructor(private http: Http) { }
 
-  // Get one single station from API
-  public getStation(stationKey: string, period: string): Promise<any> {
-    return this.http.get("/api/station/" + stationKey + "/" + period).toPromise();
+  // get the the files from API
+  public getAllContracts() {
+    return this.http.get("/api/allContracts");
   }
 
-  // get the stations from API
-  public getStations() {
-    return this.http.get("/api/stations");
+    // get the the files from API
+  public postContract(contract: any) {
+    return this.http.post("/api/addContract", contract);
   }
 
 }

@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {StationService} from ".././services/station.service";
+import {HttpService} from ".././services/http.service";
 
 @Component({
     selector: "dashboard",
@@ -10,10 +10,9 @@ import {StationService} from ".././services/station.service";
 export class DashboardComponent implements OnInit {
     public page: string;
 
-    constructor(private stationService: StationService) {}
+    constructor(private httpService: HttpService) {}
 
     ngOnInit() {
-        this.stationService.setStations(); // Set stations to application
     }
 
     public changePage(page: string): void {
