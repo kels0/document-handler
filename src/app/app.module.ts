@@ -15,6 +15,7 @@ import { HttpService } from "./services/http.service"
 import { routing } from "./app.routing";
 import { OrderBy } from "./pipes/orderBy.pipe";
 import { ListItemComponent } from './list-item/list-item.component';
+import { AddNewComponent } from './dashboard/add-new/add-new.component';
 
 @NgModule({
     imports: [
@@ -30,6 +31,7 @@ import { ListItemComponent } from './list-item/list-item.component';
         OrderBy,
         ContractPageComponent,
         ListItemComponent,
+        AddNewComponent,
     ],
     providers: [
         HelperService,

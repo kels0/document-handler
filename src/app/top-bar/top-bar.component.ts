@@ -21,7 +21,7 @@ export class TopbarComponent {
         this.buttons = [
             { name: "Contracts", value: "contract" },
             { name: "Insurance", value: "insurance" },
-            { name: "Receipts", value: "receipt" },
+            { name: "Receipts", value: "receipt" }
         ];
     }
     public updatePage(value: string) {

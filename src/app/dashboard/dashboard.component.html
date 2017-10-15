@@ -1,6 +1,6 @@
 <div class="dashboard">
     <top-bar (changeCurrentPage)="changePage($event)"></top-bar>
-    <div [ngSwitch]="page">
+    <div class="page" [ngSwitch]="page">
         <div *ngSwitchCase="'contract'">
             <app-contract-page></app-contract-page>
         </div>

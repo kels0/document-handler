@@ -5,8 +5,12 @@
             <a class="navbar-brand">Local Document Handler</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li *ngFor="let button of buttons" ><a (click)="updatePage(button.value)">{{button.name}}</a></li>
+                <li *ngFor="let button of buttons"><a (click)="updatePage(button.value)">{{button.name}}</a></li>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addItemModal">
+                    Add new
+                </button>
             </ul>
         </div>
     </nav>
 </div>
+<app-add-new></app-add-new>
