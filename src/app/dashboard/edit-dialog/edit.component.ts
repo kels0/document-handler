@@ -14,11 +14,7 @@ export interface IOptions {
   styleUrls: ['./edit.component.less']
 })
 export class EditComponent implements OnInit {
-  public name: string;
-  public description: string;
-  public type: string;
-  public fileLocation: string;
-  public createdData: string;
+  public createdDate: string;
   @Input() document: IContract;
   @Output() refreshPage: EventEmitter<{}> = new EventEmitter();
 
@@ -37,6 +33,7 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.createdDate = this.helperService.convertToYMD(this.document.createdDate);
   }
 
   public saveDocument(): void {

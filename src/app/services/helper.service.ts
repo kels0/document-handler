@@ -17,8 +17,13 @@ export class HelperService {
     return hDisplay + mDisplay + sDisplay;
   }
 
+  public getDate(): number {
+    return new Date().getTime();
+  }
+
   // More UI friendly date
-  public convertToYMD(date: Date): string {
+  public convertToYMD(timestamp: number): string {
+    const date = new Date(timestamp);
     return date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
   }
 

@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { ContractService } from "../.././services/contract.service";
+import { ContractService, IContract } from "../.././services/contract.service";
 import 'rxjs/add/operator/debounceTime.js';
 import 'rxjs/add/operator/distinctUntilChanged';
 declare var jquery: any;
@@ -12,7 +12,7 @@ declare var $: any;
 })
 export class SearchPageComponent implements AfterViewInit {
   public searchString: string;
-  public documents: any[];
+  public documents: IContract[] = [];
   
   constructor(private contractService: ContractService) { }
 

@@ -26,7 +26,9 @@ export class DashboardComponent implements OnInit {
     }
 
     public changePage(page: string): void {
-        this.page = page;
+        if (page !== this.page) {
+            this.page = page;
+        }
     }
 
     public refreshData(): void {

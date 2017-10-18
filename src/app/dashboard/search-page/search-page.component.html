@@ -6,7 +6,21 @@
     <button type="submit" class="btn btn-primary" (click)="onSearch()">Search</button>
   </div>
 </div>
-<div class="list-group">
+<div class="list-group" *ngIf="documents.length > 0">
+  <div class="row list-group-item datagrid-info">
+    <div class="col-md-3">
+      Document name
+    </div>
+    <div class="col-md-4">
+      Description
+    </div>
+    <div class="col-md-3">
+      Created date
+    </div>
+    <div class="col-md-2">
+      Options
+    </div>
+  </div>
   <div class="list-group-item" *ngFor="let document of documents">
     <div class="document-container">
         <app-list-item [document]="document"></app-list-item>

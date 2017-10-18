@@ -9,7 +9,7 @@ export interface IContract {
   description: string;
   fileLocation: string;
   type: string;
-  createdDate: string;
+  createdDate: number;
 }
 
 @Injectable()

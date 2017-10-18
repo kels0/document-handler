@@ -46,7 +46,7 @@ export class NewItemComponent implements OnInit {
       name: this.name,
       description: this.description,
       fileLocation: this.fileLocation,
-      createdDate: ""
+      createdDate: this.helperService.getDate()
     };
     this.contractService.addContract(document)
       .toPromise()

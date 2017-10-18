@@ -12,7 +12,7 @@ export class ContractPageComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    
+    this.refreshPage();
   }
   
   public refreshPage(): void {
