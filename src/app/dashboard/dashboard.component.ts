@@ -1,5 +1,5 @@
-import {Component, OnInit} from "@angular/core";
-import {HttpService} from ".././services/http.service";
+import {Component, OnInit, Input } from "@angular/core";
+import { ContractService, IContract } from ".././services/contract.service";
 
 @Component({
     selector: "dashboard",
@@ -9,13 +9,27 @@ import {HttpService} from ".././services/http.service";
 
 export class DashboardComponent implements OnInit {
     public page: string;
+    public documents: IContract[] = [];
+    @Input() selectedDocument: IContract;
 
-    constructor(private httpService: HttpService) {}
+    constructor(private contractService: ContractService) {}
 
     ngOnInit() {
+        this.getContracts();
+    }
+
+    private getContracts(): void {
+        this.contractService.getAllContracts()
+        .subscribe((contracts) => {
+            this.documents = contracts.json()
+        });
     }
 
     public changePage(page: string): void {
         this.page = page;
+    }
+
+    public refreshData(): void {
+        this.getContracts();
     }
 }

@@ -1,0 +1,32 @@
+<div class="modal fade" id="{{document.id}}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalLabel">Add Document</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="title">Name:</label>
+          <input type="text" class="form-control" id="title" [(ngModel)]="document.name">
+        </div>
+        <div class="form-group">
+          <label for="documentType">Select document type:</label>
+          <select class="form-control" id="documentType" [(ngModel)]="document.type">
+            <option value="{{option.value}}" *ngFor="let option of options">{{option.name}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="description">Description:</label>
+          <textarea class="form-control" rows="5" id="description" [(ngModel)]="document.description"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="cancel()" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="saveDocument()" data-dismiss="modal">Update</button>
+      </div>
+    </div>
+  </div>
+</div>

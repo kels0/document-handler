@@ -1,12 +1,20 @@
-
-  <div class="row">
-      <div class="col-sm-4">
-        {{contract.name}}
-      </div>
-      <div class="col-sm-4">
-        {{contract.description}}
-      </div>
-      <div class="col-sm-4">
-        something else
-      </div>
-  </div>
+<div class="row">
+    <div class="col-md-3">
+      {{document.name}}
+    </div>
+    <div class="col-md-4">
+      {{document.description}}
+    </div>
+    <div class="col-md-3">
+      something else
+    </div>
+    <div class="col-md-2">
+      <button type="button" class="btn btn-warning" (click)="deleteDocument()">
+          Delete
+      </button>
+      <button type="button" class="btn btn-success" data-toggle="modal" [attr.data-target]="'#' + document.id">
+          Edit
+      </button>
+    </div>
+</div>
+<app-edit [document]="document" (refreshPage)="updateData()"></app-edit>

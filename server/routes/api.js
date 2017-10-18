@@ -16,12 +16,58 @@ router.get("/allContracts", (req, res, next) => {
   });
 });
 
+router.get("/getContract/:value", (req, res, next) => {
+  const name = req.params.value;
+  MongoClient.connect(DB_URL, (err, db) => {
+    db.collection(CONTRACTS).find({"name": { $regex : new RegExp(name, "i")}}).toArray((err, data) => {
+      assert.equal(err, null);
+      res.send(data);
+    });
+  });
+});
+
 // POST 
 router.post("/addContract", (req, res) => {
   MongoClient.connect(DB_URL, (err, db) => {
     db.collection(CONTRACTS).insertOne(req.body, (err, result) => {
       assert.equal(err, null);
       res.send("Inserted a document into the contract collection.")
+    });
+  });
+});
+
+// POST 
+router.put("/updateContract", (req, res) => {
+  const contractId = req.body.id;
+  const data = req.body;
+  MongoClient.connect(DB_URL, (err, db) => {
+    db.collection(CONTRACTS).updateOne(
+      { 
+        "id": contractId 
+      }, 
+      { 
+        $set: 
+        {
+          "name": data.name,
+          "description": data.description,
+          "type": data.type,
+          "fileLocation": data.fileLocation
+        }
+    }, (err, result) => {
+      assert.equal(err, null);
+      res.send("Updated a document into the contract collection.")
+    });
+  });
+});
+
+// DELETE 
+router.delete("/deleteContract/:id", (req, res) => {
+  console.log("delete a documnet");
+  const contractId = req.params.id;
+  MongoClient.connect(DB_URL, (err, db) => {
+    db.collection(CONTRACTS).deleteOne({ "id": contractId }, (err, result) => {
+      assert.equal(err, null);
+      res.send("Deleted a document from the contract collection.")
     });
   });
 });

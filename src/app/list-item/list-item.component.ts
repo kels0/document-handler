@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { ContractService, IContract } from "./../services/contract.service"
 
 @Component({
   selector: 'app-list-item',
@@ -6,10 +7,21 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./list-item.component.less']
 })
 export class ListItemComponent implements OnInit {
-  @Input() contract: any;
-  constructor() { }
+  @Input() document: IContract;
+  @Output() refreshPage: EventEmitter<{}> = new EventEmitter();
+  constructor(private contractService: ContractService) { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  public deleteDocument(): void {
+    this.contractService.deleteContract(this.document.id)
+      .toPromise()
+      .then(() => {
+        this.updateData();
+      });
   }
 
+  public updateData(): void {
+    this.refreshPage.emit();
+  }
 }

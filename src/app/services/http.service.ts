@@ -1,20 +1,25 @@
 import { Injectable } from "@angular/core";
 import { Http, RequestOptions, URLSearchParams } from "@angular/http";
-import "rxjs/Rx";
+import {Observable} from 'rxjs/Rx';
 
 @Injectable()
 export class HttpService {
 
   constructor(private http: Http) { }
 
-  // get the the files from API
-  public getAllContracts() {
-    return this.http.get("/api/allContracts");
+  public get(url: string): Observable<any> {
+    return this.http.get(url);
   }
 
-    // get the the files from API
-  public postContract(contract: any) {
-    return this.http.post("/api/addContract", contract);
+  public post(url: string, data: any): Observable<any> {
+    return this.http.post(url, data);
   }
 
+  public delete(url: string): Observable<any> {
+    return this.http.delete(url);
+  }
+
+  public put(url: string, data: any): Observable<any> {
+    return this.http.put(url, data);
+  }
 }

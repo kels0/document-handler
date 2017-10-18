@@ -1,4 +1,4 @@
-<div class="modal fade" id="addItemModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal fade" id="addNewModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -10,22 +10,22 @@
       <div class="modal-body">
         <div class="form-group">
           <label for="title">Name:</label>
-          <input type="text" class="form-control" id="title" [(ngModel)]="documentTitle">
+          <input type="text" class="form-control" id="title" [(ngModel)]="name">
         </div>
         <div class="form-group">
           <label for="documentType">Select document type:</label>
-          <select class="form-control" id="documentType" [(ngModel)]="selectedType">
+          <select class="form-control" id="documentType" [(ngModel)]="type">
             <option value="{{option.value}}" *ngFor="let option of options">{{option.name}}</option>
           </select>
         </div>
         <div class="form-group">
           <label for="description">Description:</label>
-          <textarea class="form-control" rows="5" id="description" [(ngModel)]="documentDescription"></textarea>
+          <textarea class="form-control" rows="5" id="description" [(ngModel)]="description"></textarea>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="addDocument()" data-dismiss="modal">Add item</button>
+        <button type="button" class="btn btn-primary" (click)="saveDocument()" data-dismiss="modal">Add item</button>
       </div>
     </div>
   </div>

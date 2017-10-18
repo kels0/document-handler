@@ -1,0 +1,7 @@
+<div class="list-group">
+  <div class="list-group-item" *ngFor="let document of documents">
+    <div class="document-container">
+        <app-list-item (refreshPage)="refreshPage()" [document]="document"></app-list-item>
+    </div>
+  </div>
+</div>
