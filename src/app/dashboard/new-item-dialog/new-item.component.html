@@ -22,9 +22,17 @@
           <label for="description">Description:</label>
           <textarea class="form-control" rows="5" id="description" [(ngModel)]="description"></textarea>
         </div>
+        <div class="input-group">
+          <label class="input-group-btn">
+            <span class="btn btn-primary">
+            Choose file <input type="file" name="file" style="display: none;">
+            </span>
+          </label>
+          <input type="text" class="form-control" readonly [(ngModel)]="fileName">
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" (click)="closeModal()" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" (click)="saveDocument()" data-dismiss="modal">Add item</button>
       </div>
     </div>

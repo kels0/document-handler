@@ -35,5 +35,4 @@ export class SearchPageComponent implements AfterViewInit {
       () => {console.log("Subscription finished")}
     );
   }
-
 }

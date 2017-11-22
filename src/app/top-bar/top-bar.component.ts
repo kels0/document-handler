@@ -16,6 +16,7 @@ export class TopbarComponent {
     @Output() changeCurrentPage: EventEmitter<any> = new EventEmitter();
     @Output() refreshData: EventEmitter<any> = new EventEmitter();
     private currentPage: string;
+    public show: boolean = false;
     public buttons: IMenuNames[];
 
     constructor(private httpService: HttpService

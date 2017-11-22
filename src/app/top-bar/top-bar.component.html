@@ -6,11 +6,11 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li *ngFor="let button of buttons"><a (click)="updatePage(button.value)">{{button.name}}</a></li>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNewModal">
+                <button type="button" class="btn btn-primary" (click)="show = !show" data-toggle="modal" data-target="#addNewModal">
                     Add new
                 </button>
             </ul>
         </div>
     </nav>
 </div>
-<app-new-item (refreshPage)="refreshPage()"></app-new-item>
+<app-new-item *ngIf="show"  (closeModalEvent)="show = !show" (refreshPage)="refreshPage()"></app-new-item>
