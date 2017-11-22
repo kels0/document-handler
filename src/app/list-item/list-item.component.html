@@ -1,27 +1,28 @@
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-2">
       <img class="img-thumbnail thumbnail" [src]="file">
     </div>
     <div class="col-md-2">
       {{document.name}}
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
       {{document.description}}
     </div>
     <div class="col-md-2">
       {{createdDate}}
     </div>
     <div class="col-md-2">
-      <button type="button" class="btn btn-warning" (click)="deleteDocument()">
-          Delete
-      </button>
-      <button type="button" class="btn btn-success" data-toggle="modal" [attr.data-target]="'#' + document.id">
+      <button type="button" class="btn btn-success" (click)="showEdit = !showEdit" data-toggle="modal" [attr.data-target]="'#edit' + document.id">
           Edit
       </button>
-      <button type="button" class="btn btn-success" (click)="show = !show" data-toggle="modal" [attr.data-target]="'#' + document.name">
+      <button type="button" class="btn btn-success" (click)="showPreview = !showPreview" data-toggle="modal" [attr.data-target]="'#view' + document.id">
           View
+      </button>
+      <button type="button" class="btn btn-warning" (click)="showDelete = !showDelete" data-toggle="modal" [attr.data-target]="'#delete' + document.id">
+          Delete
       </button>
     </div>
 </div>
-<app-preview-document *ngIf="show" [document]="document" [file]="file"></app-preview-document>
-<app-edit [document]="document" (refreshPage)="updateData()"></app-edit>
+<app-preview-document *ngIf="showPreview" (closeModalEvent)="showPreview = !showPreview" [document]="document" [file]="file"></app-preview-document>
+<app-edit *ngIf="showEdit" [document]="document" (refreshPage)="updateData()" (closeModalEvent)="showEdit = !showEdit"></app-edit>
+<app-delete-item *ngIf="showDelete" [document]="document" (refreshPage)="updateData()" (closeModalEvent)="showDelete = !showDelete"></app-delete-item>

@@ -14,7 +14,7 @@ export class ContractPageComponent implements OnInit {
   ngOnInit() {
     this.refreshPage();
   }
-  
+
   public refreshPage(): void {
     this.refreshData.emit();
   }
