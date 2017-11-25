@@ -1,4 +1,4 @@
-import {Component, OnInit, Input } from "@angular/core";
+import {Component } from "@angular/core";
 
 @Component({
     selector: "dashboard",
@@ -6,32 +6,12 @@ import {Component, OnInit, Input } from "@angular/core";
     styleUrls: ["./dashboard.component.less"],
 })
 
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
     public page: string;
-    // public documents: IDocument[] = [];
-
-    constructor(
-        // private contractService: ContractService
-    ) {}
-
-    ngOnInit() {
-        // this.getContracts();
-    }
-
-    /*private getContracts(): void {
-        this.contractService.getAllContracts()
-        .subscribe((contracts) => {
-            this.documents = contracts.json()
-        });
-    }*/
 
     public changePage(page: string): void {
         if (page !== this.page) {
             this.page = page;
         }
-    }
-
-    public refreshData(): void {
-        // this.getContracts();
     }
 }

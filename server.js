@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 const document = require("./server/routes/document");
 const contract = require("./server/routes/contract");
 const insurance = require("./server/routes/insurance");
+const receipts = require("./server/routes/receipts");
 const file = require("./server/routes/file");
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, "dist")));
 app.use("/document", document);
 app.use("/contract", contract);
 app.use("/insurance", insurance);
+app.use("/receipts", receipts);
 app.use("/file", file);
 
 // Catch all other routes and return the index file

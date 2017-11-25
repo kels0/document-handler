@@ -1,4 +1,9 @@
 <div class="container">
+  <div class="form-group">
+    <select class="form-control" id="documentType" [(ngModel)]="type">
+      <option value="{{option.value}}" *ngFor="let option of options">{{option.name}}</option>
+    </select>
+  </div>
   <div class="form-group search-field">
     <input type="text" class="form-control" id="search" [(ngModel)]="searchString" placeholder="Search for documents">
   </div>

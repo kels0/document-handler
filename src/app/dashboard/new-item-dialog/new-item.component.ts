@@ -1,14 +1,9 @@
 import { Component, Output, Input, EventEmitter, OnInit } from "@angular/core";
-import { DocumentService, IDocument } from "../../services/document.service";
+import { DocumentService, IDocument, IOption } from "../../services/document.service";
 import { FileService, IFile } from "../../services/file.service";
 import { HelperService } from "../../services/helper.service";
 declare var jquery: any;
 declare var $: any;
-
-export interface IOption {
-  name: string;
-  value: string;
-}
 
 @Component({
   selector: "app-new-item",

@@ -1,6 +1,5 @@
 import { Component, AfterViewInit } from "@angular/core";
-import { ContractService } from "../.././services/contract.service";
-import { IDocument } from "../.././services/document.service";
+import { DocumentService, IDocument, IOption } from "../.././services/document.service";
 import "rxjs/add/operator/debounceTime.js";
 import "rxjs/add/operator/distinctUntilChanged";
 declare var jquery: any;
@@ -13,11 +12,21 @@ declare var $: any;
 })
 export class SearchPageComponent implements AfterViewInit {
   public searchString: string;
+  public type: string;
   public documents: IDocument[] = [];
 
+  public options: IOption[] = [
+    { name: "Contract", value: "contracts" },
+    { name: "Insurance", value: "insurances" },
+    { name: "Receipt", value: "receipts" },
+    { name: "Other", value: "others" }
+  ];
+
   constructor(
-    private contractService: ContractService
-    ) { }
+    private documentService: DocumentService
+    ) {
+      this.type = this.options[0].value;
+    }
 
   ngAfterViewInit() {
     $(".container").keypress((e) => {
@@ -29,13 +38,16 @@ export class SearchPageComponent implements AfterViewInit {
   }
 
   public onSearch(): void {
-    this.contractService.getContractByName(this.searchString)
+    let searchString = this.searchString;
+    if (!searchString) {
+      searchString = ".*";
+    }
+    this.documentService.getDocumentByType(searchString, this.type)
     .debounceTime(1000)
     .distinctUntilChanged()
     .subscribe(
-      (response) => {this.documents = response.json(); },
-      (error) => {console.log(error)},
-      () => {console.log("Subscription finished")}
-    );
+      (documents) => {
+        this.documents = documents.json();
+      });
   }
 }
