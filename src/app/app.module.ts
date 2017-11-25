@@ -30,6 +30,7 @@ import { FileService } from "./services/file.service";
 // other modules
 import { routing } from "./app.routing";
 import { OrderBy } from "./pipes/orderBy.pipe";
+import { Constants } from "./constants";
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { OrderBy } from "./pipes/orderBy.pipe";
         DocumentService,
         InsuranceService,
         ReceiptsService,
-        FileService
+        FileService,
+        Constants,
     ],
 
     bootstrap: [AppComponent]

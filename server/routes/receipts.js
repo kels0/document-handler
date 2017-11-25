@@ -10,7 +10,7 @@ const DOCUMENTS = "documents"
 // GET
 router.get("/allReceipts", (req, res, next) => {
   MongoClient.connect(DB_URL, (err, db) => {
-    db.collection(DOCUMENTS).find({"type": "receipts"}).toArray((err, data) => {
+    db.collection(DOCUMENTS).find({"type": "receipt"}).toArray((err, data) => {
       assert.equal(err, null);
       res.send(data);
     });
@@ -22,7 +22,7 @@ router.get("/getReceipts/:value", (req, res, next) => {
   MongoClient.connect(DB_URL, (err, db) => {
     db.collection(DOCUMENTS).find({
       "name": { $regex : new RegExp(name, "i")},
-      "type": "receipts"  
+      "type": "receipt"  
     }).toArray((err, data) => {
       assert.equal(err, null);
       res.send(data);

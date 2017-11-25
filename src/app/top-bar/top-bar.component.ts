@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
-import { HelperService } from ".././services/helper.service";
+import { Constants } from ".././constants";
 
 interface IMenuNames {
     name: string;
@@ -19,13 +19,13 @@ export class TopbarComponent {
     public buttons: IMenuNames[];
 
     constructor(
-        private helperService: HelperService
+        private constants: Constants
     ) {
         this.buttons = [
-            { name: "Home", value: "home" },
-            { name: "Contracts", value: "contract" },
-            { name: "Insurance", value: "insurance" },
-            { name: "Receipts", value: "receipt" }
+            { name: "Search", value: "home" },
+            { name: "Contracts", value: this.constants.CONTRACTS },
+            { name: "Insurance", value: this.constants.INSURANCES },
+            { name: "Receipts", value: this.constants.RECEIPTS }
         ];
         this.currentPage = this.buttons[0].value;
     }

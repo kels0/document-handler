@@ -2,6 +2,8 @@ import { Component, Output, Input, EventEmitter, OnInit, AfterViewInit } from "@
 import { HttpService } from "../../services/http.service";
 import { DocumentService, IDocument } from "../../services/document.service";
 import { HelperService } from "../../services/helper.service";
+import { Constants } from "../.././constants";
+
 declare var jquery: any;
 declare var $: any;
 export interface IOptions {
@@ -21,15 +23,16 @@ export class EditComponent implements OnInit, AfterViewInit {
   @Output() closeModalEvent: EventEmitter<any> = new EventEmitter();
 
   public options: IOptions[] = [
-    { name: "Contract", value: "contracts" },
-    { name: "Insurance", value: "insurances" },
-    { name: "Receipt", value: "receipts" },
-    { name: "Other", value: "others" }
+    { name: "Contract", value: this.constans.CONTRACTS },
+    { name: "Insurance", value: this.constans.INSURANCES },
+    { name: "Receipt", value: this.constans.RECEIPTS },
+    { name: "Other", value: this.constans.OTHER }
   ];
 
   constructor(
     private helperService: HelperService,
-    private documentService: DocumentService
+    private documentService: DocumentService,
+    private constans: Constants
   ) {}
 
   ngOnInit() {

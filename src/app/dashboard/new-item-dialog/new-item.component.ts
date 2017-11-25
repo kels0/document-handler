@@ -2,6 +2,8 @@ import { Component, Output, Input, EventEmitter, OnInit } from "@angular/core";
 import { DocumentService, IDocument, IOption } from "../../services/document.service";
 import { FileService, IFile } from "../../services/file.service";
 import { HelperService } from "../../services/helper.service";
+import { Constants } from "../.././constants";
+
 declare var jquery: any;
 declare var $: any;
 
@@ -19,16 +21,17 @@ export class NewItemComponent implements OnInit {
   @Output() closeModalEvent: EventEmitter<any> = new EventEmitter();
 
   public options: IOption[] = [
-    { name: "Contract", value: "contracts" },
-    { name: "Insurance", value: "insurances" },
-    { name: "Receipt", value: "receipts" },
-    { name: "Other", value: "others" }
+    { name: "Contract", value: this.constants.CONTRACTS },
+    { name: "Insurance", value: this.constants.INSURANCES },
+    { name: "Receipt", value: this.constants.RECEIPTS },
+    { name: "Other", value: this.constants.OTHER }
   ];
 
   constructor(
     private helperService: HelperService,
     private documentService: DocumentService,
-    private fileService: FileService
+    private fileService: FileService,
+    private constants: Constants
   ) {
     this.type = this.options[0].value;
   }

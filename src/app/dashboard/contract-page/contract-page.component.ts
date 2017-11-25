@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { IDocument } from "../.././services/document.service";
 import { ContractService } from "../.././services/contract.service";
 import { HelperService } from "../.././services/helper.service";
+import { Constants } from "../.././constants";
 
 @Component({
   selector: "app-contract-page",
@@ -13,13 +14,14 @@ export class ContractPageComponent implements OnInit {
   // @Output() refreshData: EventEmitter<{}> = new EventEmitter();
   constructor(
     private contractService: ContractService,
-    private helperService: HelperService
+    private helperService: HelperService,
+    private constants: Constants
   ) { }
 
   ngOnInit() {
     this.getContracts();
     this.helperService.currentType.subscribe((document) => {
-      if (document && this.documents && document.type === "contracts") {
+      if (document && this.documents && document.type === this.constants.CONTRACTS) {
         this.getContracts();
       }
     });

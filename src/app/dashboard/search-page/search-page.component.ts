@@ -1,5 +1,6 @@
 import { Component, AfterViewInit } from "@angular/core";
 import { DocumentService, IDocument, IOption } from "../.././services/document.service";
+import { Constants } from "../.././constants";
 import "rxjs/add/operator/debounceTime.js";
 import "rxjs/add/operator/distinctUntilChanged";
 declare var jquery: any;
@@ -18,19 +19,18 @@ export class SearchPageComponent implements AfterViewInit {
 
   public options: IOption[] = [
     { name: "All", value: SearchPageComponent.ALL },
-    { name: "Contract", value: "contracts" },
-    { name: "Insurance", value: "insurances" },
-    { name: "Receipt", value: "receipts" },
-    { name: "Other", value: "others" }
+    { name: "Contract", value: this.constans.CONTRACTS },
+    { name: "Insurance", value: this.constans.INSURANCES },
+    { name: "Receipt", value: this.constans.RECEIPTS },
+    { name: "Other", value: this.constans.OTHER }
   ];
 
-
-
   constructor(
-    private documentService: DocumentService
-    ) {
-      this.type = this.options[0].value;
-    }
+    private documentService: DocumentService,
+    private constans: Constants
+  ) {
+    this.type = this.options[0].value;
+  }
 
   ngAfterViewInit() {
     $(".container").keypress((e) => {
