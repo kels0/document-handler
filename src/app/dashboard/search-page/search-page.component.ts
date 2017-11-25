@@ -11,16 +11,20 @@ declare var $: any;
   styleUrls: ["./search-page.component.less"]
 })
 export class SearchPageComponent implements AfterViewInit {
+  private static ALL = ".*";
   public searchString: string;
   public type: string;
   public documents: IDocument[] = [];
 
   public options: IOption[] = [
+    { name: "All", value: SearchPageComponent.ALL },
     { name: "Contract", value: "contracts" },
     { name: "Insurance", value: "insurances" },
     { name: "Receipt", value: "receipts" },
     { name: "Other", value: "others" }
   ];
+
+
 
   constructor(
     private documentService: DocumentService
@@ -38,10 +42,7 @@ export class SearchPageComponent implements AfterViewInit {
   }
 
   public onSearch(): void {
-    let searchString = this.searchString;
-    if (!searchString) {
-      searchString = ".*";
-    }
+    const searchString = this.searchString ? this.searchString : SearchPageComponent.ALL;
     this.documentService.getDocumentByType(searchString, this.type)
     .debounceTime(1000)
     .distinctUntilChanged()

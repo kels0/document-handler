@@ -23,6 +23,6 @@
       </button>
     </div>
 </div>
-<app-preview-document *ngIf="showPreview" (closeModalEvent)="showPreview = !showPreview" [document]="document" [file]="file"></app-preview-document>
+<app-preview-document *ngIf="showPreview" [document]="document" (closeModalEvent)="showPreview = !showPreview" [file]="file"></app-preview-document>
 <app-edit *ngIf="showEdit" [document]="document" (closeModalEvent)="showEdit = !showEdit"></app-edit>
 <app-delete-item *ngIf="showDelete" [document]="document" (closeModalEvent)="showDelete = !showDelete"></app-delete-item>

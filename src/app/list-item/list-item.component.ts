@@ -10,9 +10,6 @@ import { DomSanitizer } from "@angular/platform-browser";
   styleUrls: ["./list-item.component.less"]
 })
 export class ListItemComponent implements OnInit {
-  public showPreview: boolean;
-  public showEdit = false;
-  public showDelete = false;
   public createdDate: string;
   public file: any;
   @Input() document: IDocument;
@@ -25,17 +22,16 @@ export class ListItemComponent implements OnInit {
 
   ngOnInit() {
     this.createdDate = this.helperService.convertToYMD(this.document.createdDate);
+    // TODO: remove when file is required
     if (this.document.file.length > 0) {
-      const fileName = this.document.file[0].filename;
-      this.fileService.getFile(fileName).subscribe((file) => {
-        this.file = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file.blob()));
-      });
+      this.getImage();
     }
   }
 
-  public toggleModal(): void {
-    setTimeout(() => {
-      this.showPreview = !this.showPreview;
-    }, 100);
+  private getImage(): void {
+    const fileName = this.document.file[0].filename;
+    this.fileService.getFile(fileName).subscribe((file) => {
+      this.file = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file.blob()));
+    });
   }
 }
