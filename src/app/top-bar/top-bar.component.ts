@@ -1,5 +1,5 @@
-import {Component, Input, Output, EventEmitter} from "@angular/core";
-import {HttpService} from ".././services/http.service";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { HelperService } from ".././services/helper.service";
 
 interface IMenuNames {
     name: string;
@@ -14,12 +14,12 @@ interface IMenuNames {
 
 export class TopbarComponent {
     @Output() changeCurrentPage: EventEmitter<any> = new EventEmitter();
-    @Output() refreshData: EventEmitter<any> = new EventEmitter();
     private currentPage: string;
-    public show: boolean = false;
+    public show = false;
     public buttons: IMenuNames[];
 
-    constructor(private httpService: HttpService
+    constructor(
+        private helperService: HelperService
     ) {
         this.buttons = [
             { name: "Home", value: "home" },
@@ -32,9 +32,5 @@ export class TopbarComponent {
     public updatePage(button?: string) {
         this.currentPage = button;
         this.changeCurrentPage.emit(this.currentPage);
-    }
-
-    public refreshPage(): void {
-        this.refreshData.emit();
     }
 }

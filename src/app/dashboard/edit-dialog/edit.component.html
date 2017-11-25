@@ -10,17 +10,17 @@
       <div class="modal-body">
         <div class="form-group">
           <label for="title">Name:</label>
-          <input type="text" class="form-control" id="title" [(ngModel)]="document.name">
+          <input type="text" class="form-control" id="title" [(ngModel)]="editingDocument.name">
         </div>
         <div class="form-group">
           <label for="documentType">Select document type:</label>
-          <select class="form-control" id="documentType" [(ngModel)]="document.type">
+          <select class="form-control" id="documentType" [(ngModel)]="editingDocument.type">
             <option value="{{option.value}}" *ngFor="let option of options">{{option.name}}</option>
           </select>
         </div>
         <div class="form-group">
           <label for="description">Description:</label>
-          <textarea class="form-control" rows="5" id="description" [(ngModel)]="document.description"></textarea>
+          <textarea class="form-control" rows="5" id="description" [(ngModel)]="editingDocument.description"></textarea>
         </div>
         <div class="form-group">
           <label for="created">Created:</label>
@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" (click)="resetDocument()" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" (click)="saveDocument()" data-dismiss="modal">Update</button>
       </div>
     </div>

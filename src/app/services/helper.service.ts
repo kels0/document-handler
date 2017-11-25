@@ -1,9 +1,15 @@
 import { Injectable } from "@angular/core";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { IDocument } from "./document.service";
 
 @Injectable()
 export class HelperService {
+  private typeSource = new BehaviorSubject<IDocument>(null);
+  public currentType = this.typeSource.asObservable();
 
-  constructor() { }
+  public updatePage(document: IDocument) {
+    this.typeSource.next(document)
+  }
 
   // More UI friendly time
   public secondsToTime(seconds: number) {
@@ -35,8 +41,8 @@ export class HelperService {
   }
 
   public generateId(): string {
-    return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' +
-      this.s4() + '-' + this.s4() + this.s4() + this.s4();
+    return this.s4() + this.s4() + "-" + this.s4() + "-" + this.s4() + "-" +
+      this.s4() + "-" + this.s4() + this.s4() + this.s4();
   }
 
   private s4(): string {

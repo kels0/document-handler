@@ -9,19 +9,25 @@ import { FormsModule } from "@angular/forms";
 import { AppComponent } from "./app.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ContractPageComponent } from "./dashboard/contract-page/contract-page.component";
+import { InsurancePageComponent } from "./dashboard/insurance-page/insurance-page.component";
 import { TopbarComponent } from "./top-bar/top-bar.component";
-import { HelperService } from "./services/helper.service"
-import { HttpService } from "./services/http.service"
-import { ContractService } from "./services/contract.service"
-import { FileService } from "./services/file.service"
-import { routing } from "./app.routing";
-import { OrderBy } from "./pipes/orderBy.pipe";
 import { ListItemComponent } from "./list-item/list-item.component";
 import { NewItemComponent } from "./dashboard/new-item-dialog/new-item.component";
 import { EditComponent } from "./dashboard/edit-dialog/edit.component";
 import { SearchPageComponent } from "./dashboard/search-page/search-page.component";
 import { PreviewDocumentComponent } from "./list-item/preview-document/preview-document.component";
 import { DeleteItemComponent } from "./list-item/delete-item/delete-item.component";
+// Service modules
+import { HelperService } from "./services/helper.service"
+import { HttpService } from "./services/http.service"
+import { ContractService } from "./services/contract.service"
+import { DocumentService } from "./services/document.service"
+import { InsuranceService } from "./services/insurance.service"
+import { FileService } from "./services/file.service"
+// other modules
+import { routing } from "./app.routing";
+import { OrderBy } from "./pipes/orderBy.pipe";
+
 
 @NgModule({
     imports: [
@@ -36,6 +42,7 @@ import { DeleteItemComponent } from "./list-item/delete-item/delete-item.compone
         TopbarComponent,
         OrderBy,
         ContractPageComponent,
+        InsurancePageComponent,
         ListItemComponent,
         NewItemComponent,
         EditComponent,
@@ -47,6 +54,8 @@ import { DeleteItemComponent } from "./list-item/delete-item/delete-item.compone
         HelperService,
         HttpService,
         ContractService,
+        DocumentService,
+        InsuranceService,
         FileService
     ],
 

@@ -19,10 +19,10 @@
           View
       </button>
       <button type="button" class="btn btn-warning" (click)="showDelete = !showDelete" data-toggle="modal" [attr.data-target]="'#delete' + document.id">
-          Delete
+          Delete {{showPreview}}
       </button>
     </div>
 </div>
 <app-preview-document *ngIf="showPreview" (closeModalEvent)="showPreview = !showPreview" [document]="document" [file]="file"></app-preview-document>
-<app-edit *ngIf="showEdit" [document]="document" (refreshPage)="updateData()" (closeModalEvent)="showEdit = !showEdit"></app-edit>
-<app-delete-item *ngIf="showDelete" [document]="document" (refreshPage)="updateData()" (closeModalEvent)="showDelete = !showDelete"></app-delete-item>
+<app-edit *ngIf="showEdit" [document]="document" (closeModalEvent)="showEdit = !showEdit"></app-edit>
+<app-delete-item *ngIf="showDelete" [document]="document" (closeModalEvent)="showDelete = !showDelete"></app-delete-item>

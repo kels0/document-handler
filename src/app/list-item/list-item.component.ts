@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
-import { ContractService, IContract } from "./../services/contract.service"
+import { IDocument } from "./../services/document.service"
 import { HelperService } from "../services/helper.service";
 import { FileService } from "../services/file.service";
 import { DomSanitizer } from "@angular/platform-browser";
@@ -10,10 +10,12 @@ import { DomSanitizer } from "@angular/platform-browser";
   styleUrls: ["./list-item.component.less"]
 })
 export class ListItemComponent implements OnInit {
+  public showPreview: boolean;
+  public showEdit = false;
+  public showDelete = false;
   public createdDate: string;
   public file: any;
-  @Input() document: IContract;
-  @Output() refreshPage: EventEmitter<{}> = new EventEmitter();
+  @Input() document: IDocument;
 
   constructor(
     private helperService: HelperService,
@@ -23,13 +25,17 @@ export class ListItemComponent implements OnInit {
 
   ngOnInit() {
     this.createdDate = this.helperService.convertToYMD(this.document.createdDate);
-    const fileName = this.document.file[0].filename;
-    this.fileService.getFile(fileName).subscribe((file) => {
-      this.file = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file.blob()));
-    });
+    if (this.document.file.length > 0) {
+      const fileName = this.document.file[0].filename;
+      this.fileService.getFile(fileName).subscribe((file) => {
+        this.file = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file.blob()));
+      });
+    }
   }
 
-  public updateData(): void {
-    this.refreshPage.emit();
+  public toggleModal(): void {
+    setTimeout(() => {
+      this.showPreview = !this.showPreview;
+    }, 100);
   }
 }

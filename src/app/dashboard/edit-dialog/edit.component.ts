@@ -1,6 +1,6 @@
 import { Component, Output, Input, EventEmitter, OnInit, AfterViewInit } from "@angular/core";
 import { HttpService } from "../../services/http.service";
-import { ContractService, IContract } from "../../services/contract.service";
+import { DocumentService, IDocument } from "../../services/document.service";
 import { HelperService } from "../../services/helper.service";
 declare var jquery: any;
 declare var $: any;
@@ -16,25 +16,25 @@ export interface IOptions {
 })
 export class EditComponent implements OnInit, AfterViewInit {
   public createdDate: string;
-  @Input() document: IContract;
-  @Output() refreshPage: EventEmitter<{}> = new EventEmitter();
+  public editingDocument: IDocument;
+  @Input() document: IDocument;
   @Output() closeModalEvent: EventEmitter<any> = new EventEmitter();
 
-
   public options: IOptions[] = [
-    { name: "Contract", value: "contracts" }, 
-    { name: "Insurance", value: "insurances" }, 
-    { name: "Receipt", value: "receipts" }, 
+    { name: "Contract", value: "contracts" },
+    { name: "Insurance", value: "insurances" },
+    { name: "Receipt", value: "receipts" },
     { name: "Other", value: "others" }
   ];
 
   constructor(
     private helperService: HelperService,
-    private contractService: ContractService
+    private documentService: DocumentService
   ) {}
 
   ngOnInit() {
     this.createdDate = this.helperService.convertToYMD(this.document.createdDate);
+    this.editingDocument = { ...this.document };
   }
 
   ngAfterViewInit() {
@@ -43,11 +43,15 @@ export class EditComponent implements OnInit, AfterViewInit {
     });
   }
 
+  public resetDocument(): void {
+    this.editingDocument = this.document;
+  }
+
   public saveDocument(): void {
-    this.contractService.updateContract(this.document)
+    this.documentService.updateContract(this.editingDocument)
       .toPromise()
       .then(() => {
-        this.refreshPage.emit();
+        this.helperService.updatePage(this.editingDocument);
       });
   }
 }

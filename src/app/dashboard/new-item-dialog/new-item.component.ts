@@ -1,6 +1,6 @@
 import { Component, Output, Input, EventEmitter, OnInit } from "@angular/core";
-import { ContractService, IContract, IFile } from "../../services/contract.service";
-import { FileService } from "../../services/file.service";
+import { DocumentService, IDocument } from "../../services/document.service";
+import { FileService, IFile } from "../../services/file.service";
 import { HelperService } from "../../services/helper.service";
 declare var jquery: any;
 declare var $: any;
@@ -22,7 +22,6 @@ export class NewItemComponent implements OnInit {
   public type: string;
   public filesToUpload: Array<File> = [];
   @Output() closeModalEvent: EventEmitter<any> = new EventEmitter();
-  @Output() refreshPage: EventEmitter<{}> = new EventEmitter();
 
   public options: IOption[] = [
     { name: "Contract", value: "contracts" },
@@ -33,7 +32,7 @@ export class NewItemComponent implements OnInit {
 
   constructor(
     private helperService: HelperService,
-    private contractService: ContractService,
+    private documentService: DocumentService,
     private fileService: FileService
   ) {
     this.type = this.options[0].value;
@@ -58,7 +57,7 @@ export class NewItemComponent implements OnInit {
       formData.append("file", files[i], files[i]["name"]);
     }
 
-    const document: IContract = {
+    const document: IDocument = {
       id: this.helperService.generateId(),
       type: this.type,
       name: this.name,
@@ -72,11 +71,11 @@ export class NewItemComponent implements OnInit {
     });
   }
 
-  private saveContract(document: IContract): void {
-    this.contractService.addContract(document)
+  private saveContract(document: IDocument): void {
+    this.documentService.addContract(document)
       .toPromise()
       .then(() => {
-        this.refreshPage.emit();
+        this.helperService.updatePage(document);
       });
   }
 }

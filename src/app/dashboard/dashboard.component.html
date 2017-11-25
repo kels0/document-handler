@@ -1,12 +1,13 @@
 <div class="dashboard">
-    <top-bar (changeCurrentPage)="changePage($event)" (refreshData)="refreshData()"></top-bar>
+    <top-bar (changeCurrentPage)="changePage($event)"></top-bar>
     <div class="page" [ngSwitch]="page">
         <div *ngSwitchCase="'contract'">
-            <app-contract-page (refreshData)="refreshData()" [documents]="documents"></app-contract-page>
+            <app-contract-page></app-contract-page>
         </div>
-        <div *ngSwitchCase="'Insurance'">
+        <div *ngSwitchCase="'insurance'">
+            <app-insurance-page></app-insurance-page>
         </div>
-        <div *ngSwitchCase="'Receipt'">
+        <div *ngSwitchCase="'receipt'">
         </div>
         <div *ngSwitchDefault>
             <app-search-page></app-search-page>

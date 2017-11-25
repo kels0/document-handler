@@ -1,25 +1,28 @@
-import { Component, AfterViewInit } from '@angular/core';
-import { ContractService, IContract } from "../.././services/contract.service";
-import 'rxjs/add/operator/debounceTime.js';
-import 'rxjs/add/operator/distinctUntilChanged';
+import { Component, AfterViewInit } from "@angular/core";
+import { ContractService } from "../.././services/contract.service";
+import { IDocument } from "../.././services/document.service";
+import "rxjs/add/operator/debounceTime.js";
+import "rxjs/add/operator/distinctUntilChanged";
 declare var jquery: any;
 declare var $: any;
 
 @Component({
-  selector: 'app-search-page',
-  templateUrl: './search-page.component.html',
-  styleUrls: ['./search-page.component.less']
+  selector: "app-search-page",
+  templateUrl: "./search-page.component.html",
+  styleUrls: ["./search-page.component.less"]
 })
 export class SearchPageComponent implements AfterViewInit {
   public searchString: string;
-  public documents: IContract[] = [];
-  
-  constructor(private contractService: ContractService) { }
+  public documents: IDocument[] = [];
+
+  constructor(
+    private contractService: ContractService
+    ) { }
 
   ngAfterViewInit() {
     $(".container").keypress((e) => {
-      //Enter key pressed
-      if(e.which == 13) {
+      // Enter key pressed
+      if (e.which === 13) {
         this.onSearch();
       }
     })
