@@ -4,6 +4,7 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { HttpModule } from "@angular/http";
 import { FormsModule } from "@angular/forms";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 // Application modules
 import { AppComponent } from "./app.component";
@@ -39,6 +40,7 @@ import { Constants } from "./constants";
         HttpModule,
         routing,
         FormsModule,
+        BrowserAnimationsModule
     ],
     declarations: [
         AppComponent,

@@ -1,7 +1,8 @@
 import { Component, AfterViewInit } from "@angular/core";
 import { DocumentService, IDocument, IOption } from "../.././services/document.service";
 import { Constants } from "../.././constants";
-import "rxjs/add/operator/debounceTime.js";
+import { trigger, state, style, transition, animate, keyframes } from "@angular/animations";
+import "rxjs/add/operator/debounceTime";
 import "rxjs/add/operator/distinctUntilChanged";
 declare var jquery: any;
 declare var $: any;
@@ -9,7 +10,18 @@ declare var $: any;
 @Component({
   selector: "app-search-page",
   templateUrl: "./search-page.component.html",
-  styleUrls: ["./search-page.component.less"]
+  styleUrls: ["./search-page.component.less"],
+  animations: [
+    trigger("moveSearchbar", [
+      state("down", style({
+        transform: "translateY(0px)",
+      })),
+      state("up", style({
+        transform: "translateY(-150px)",
+      })),
+      transition("down => up", animate("200ms ease-in")),
+    ]),
+  ]
 })
 export class SearchPageComponent implements AfterViewInit {
   private static ALL = ".*";
@@ -24,6 +36,8 @@ export class SearchPageComponent implements AfterViewInit {
     { name: "Receipt", value: this.constans.RECEIPTS },
     { name: "Other", value: this.constans.OTHER }
   ];
+
+  public state = "down";
 
   constructor(
     private documentService: DocumentService,
@@ -49,6 +63,11 @@ export class SearchPageComponent implements AfterViewInit {
     .subscribe(
       (documents) => {
         this.documents = documents.json();
+        this.animateMe();
       });
+  }
+
+  public animateMe(): void {
+    this.state = "up";
   }
 }
