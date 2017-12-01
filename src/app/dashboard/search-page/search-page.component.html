@@ -1,39 +1,37 @@
-<div [@moveSearchbar]="state">
-  <div class="container">
-    <div class="form-group">
-      <select class="form-control" id="documentType" [(ngModel)]="type">
-        <option value="{{option.value}}" *ngFor="let option of options">{{option.name}}</option>
-      </select>
+<div class="container" [@moveSearchbar]="stateBar">
+  <div class="form-group">
+    <select class="form-control" id="documentType" [(ngModel)]="type">
+      <option value="{{option.value}}" *ngFor="let option of options">{{option.name}}</option>
+    </select>
+  </div>
+  <div class="form-group search-field">
+    <input type="text" class="form-control" id="search" [(ngModel)]="searchString" placeholder="Search for documents">
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary" (click)="onSearch()">Search</button>
+  </div>
+</div>
+<div class="list-group" [@showResults]="stateResults">
+  <div class="row list-group-item datagrid-info">
+    <div class="col-md-2">
+      Preview
     </div>
-    <div class="form-group search-field">
-      <input type="text" class="form-control" id="search" [(ngModel)]="searchString" placeholder="Search for documents">
+    <div class="col-md-2">
+      Document name
     </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary" (click)="onSearch()">Search</button>
+    <div class="col-md-4">
+      Description
+    </div>
+    <div class="col-md-2">
+      Created date
+    </div>
+    <div class="col-md-2">
+      Options
     </div>
   </div>
-  <div class="list-group" *ngIf="documents.length > 0">
-    <div class="row list-group-item datagrid-info">
-      <div class="col-md-2">
-        Preview
-      </div>
-      <div class="col-md-2">
-        Document name
-      </div>
-      <div class="col-md-4">
-        Description
-      </div>
-      <div class="col-md-2">
-        Created date
-      </div>
-      <div class="col-md-2">
-        Options
-      </div>
-    </div>
-    <div class="list-group-item" *ngFor="let document of documents">
-      <div class="document-container">
-          <app-list-item [document]="document"></app-list-item>
-      </div>
+  <div class="list-group-item" *ngFor="let document of documents">
+    <div class="document-container">
+        <app-list-item [document]="document"></app-list-item>
     </div>
   </div>
 </div>

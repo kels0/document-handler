@@ -17,9 +17,20 @@ declare var $: any;
         transform: "translateY(0px)",
       })),
       state("up", style({
-        transform: "translateY(-150px)",
+        transform: "translateY(-130px)",
       })),
-      transition("down => up", animate("200ms ease-in")),
+      transition("down => up", animate("250ms")),
+    ]),
+    trigger("showResults", [
+      state("hidden", style({
+        opacity: "0",
+        transform: "translateY(0px)",
+      })),
+      state("visible", style({
+        opacity: "1",
+        transform: "translateY(-125px)",
+      })),
+      transition("hidden => visible", animate("250ms")),
     ]),
   ]
 })
@@ -37,7 +48,8 @@ export class SearchPageComponent implements AfterViewInit {
     { name: "Other", value: this.constans.OTHER }
   ];
 
-  public state = "down";
+  public stateBar = "down";
+  public stateResults = "hidden";
 
   constructor(
     private documentService: DocumentService,
@@ -68,6 +80,9 @@ export class SearchPageComponent implements AfterViewInit {
   }
 
   public animateMe(): void {
-    this.state = "up";
+    this.stateBar = "up";
+    if (this.documents.length > 0) {
+      this.stateResults = "visible";
+    }
   }
 }

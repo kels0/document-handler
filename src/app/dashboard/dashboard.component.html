@@ -2,13 +2,13 @@
     <top-bar (changeCurrentPage)="changePage($event)"></top-bar>
     <div class="page" [ngSwitch]="page">
         <div *ngSwitchCase="'contract'">
-            <app-contract-page></app-contract-page>
+            <app-grid-page [documents]="documents"></app-grid-page>
         </div>
         <div *ngSwitchCase="'insurance'">
-            <app-insurance-page></app-insurance-page>
+            <app-grid-page [documents]="documents"></app-grid-page>
         </div>
         <div *ngSwitchCase="'receipt'">
-            <app-receipts-page></app-receipts-page>
+            <app-grid-page [documents]="documents"></app-grid-page>
         </div>
         <div *ngSwitchDefault>
             <app-search-page></app-search-page>

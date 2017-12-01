@@ -55,6 +55,7 @@ export class EditComponent implements OnInit, AfterViewInit {
       .toPromise()
       .then(() => {
         this.helperService.updatePage(this.editingDocument);
-      });
+      }
+    );
   }
 }

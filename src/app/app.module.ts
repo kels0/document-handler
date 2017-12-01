@@ -9,9 +9,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 // Application modules
 import { AppComponent } from "./app.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
-import { ContractPageComponent } from "./dashboard/contract-page/contract-page.component";
-import { InsurancePageComponent } from "./dashboard/insurance-page/insurance-page.component";
-import { ReceiptsPageComponent } from "./dashboard/receipts-page/receipts-page.component";
+import { ContractPageComponent } from "./dashboard/grid-page/grid-page.component";
 import { TopbarComponent } from "./top-bar/top-bar.component";
 import { ListItemComponent } from "./list-item/list-item.component";
 import { NewItemComponent } from "./dashboard/new-item-dialog/new-item.component";
@@ -48,14 +46,12 @@ import { Constants } from "./constants";
         TopbarComponent,
         OrderBy,
         ContractPageComponent,
-        InsurancePageComponent,
         ListItemComponent,
         NewItemComponent,
         EditComponent,
         SearchPageComponent,
         PreviewDocumentComponent,
         DeleteItemComponent,
-        ReceiptsPageComponent,
     ],
     providers: [
         HelperService,
