@@ -11,4 +11,7 @@
     <button type="submit" class="btn btn-primary" (click)="onSearch()">Search</button>
   </div>
 </div>
+<div *ngIf="noDocumentsFound" class="no-doc-found">
+  <h1>Oops, nothing found. Try again :)</h1>
+</div>
 <app-grid-page class="search-grid" [documents]="documents" *ngIf="documents.length > 0"></app-grid-page>

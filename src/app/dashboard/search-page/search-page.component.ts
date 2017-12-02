@@ -25,6 +25,7 @@ declare var $: any;
 })
 export class SearchPageComponent implements AfterViewInit {
   private static ALL = ".*";
+  public noDocumentsFound = false;
   public searchString: string;
   public type: string;
   public documents: IDocument[] = [];
@@ -68,6 +69,11 @@ export class SearchPageComponent implements AfterViewInit {
   }
 
   public animateMe(): void {
-    this.stateBar = "up";
+    if (this.documents.length > 0) {
+      this.stateBar = "up";
+      this.noDocumentsFound = false;
+    } else {
+      this.noDocumentsFound = true;
+    }
   }
 }
