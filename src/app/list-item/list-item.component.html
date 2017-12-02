@@ -1,15 +1,21 @@
 <div class="row">
+    <div class="col-md-1">
+      {{index + 1}}
+    </div>
     <div class="col-md-2">
       <img class="img-thumbnail thumbnail" [src]="file">
     </div>
     <div class="col-md-2">
       {{document.name}}
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       {{document.description}}
     </div>
-    <div class="col-md-2">
+    <div class="col-md-1">
       {{createdDate}}
+    </div>
+    <div class="col-md-1">
+      {{document.type}}
     </div>
     <div class="col-md-2">
       <button type="button" class="btn btn-success" (click)="showEdit = !showEdit" data-toggle="modal" [attr.data-target]="'#edit' + document.id">

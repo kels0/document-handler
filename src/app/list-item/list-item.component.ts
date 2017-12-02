@@ -12,6 +12,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 export class ListItemComponent implements OnInit {
   public createdDate: string;
   public file: any;
+  @Input() index: number;
   @Input() document: IDocument;
 
   constructor(
@@ -22,10 +23,7 @@ export class ListItemComponent implements OnInit {
 
   ngOnInit() {
     this.createdDate = this.helperService.convertToYMD(this.document.createdDate);
-    // TODO: remove when file is required
-    if (this.document.file.length > 0) {
-      this.getImage();
-    }
+    this.getImage();
   }
 
   private getImage(): void {
