@@ -4,11 +4,13 @@ const path = require('path');
 const router = express.Router();
 const request = require("request");
 const multer = require("multer");
+const fs = require('fs');
+const pathToFolder = "public/uploads/";
 
 // storage
 const Storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(null, "./public/uploads/");
+    callback(null, "./" + pathToFolder);
   },
   filename: (req, file, callback) => {
     callback(null, file.fieldname + "_" + Date.now() + "_" + path.extname(file.originalname));
@@ -35,10 +37,15 @@ router.post("/", upload.array("file", 3), (req, res, next) => {
 
 // GET 
 router.get("/:value", (req, res) => {
-  var dir = "public/uploads/";
   res.sendFile(req.params.value, { 
-    root: dir  
+    root: pathToFolder  
   });
+})
+
+// DELETE 
+router.delete("/:value", (req, res) => {
+  fs.unlink(pathToFolder + req.params.value);
+  res.send("successfully removed file");
 })
 
 module.exports = router;

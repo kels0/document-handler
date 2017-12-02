@@ -24,4 +24,8 @@ export class FileService {
       responseType: ResponseContentType.Blob
     });
   }
+
+  public deleteFile(value: string): Observable<any> {
+    return this.httpService.delete("file/" + value);
+  }
 }

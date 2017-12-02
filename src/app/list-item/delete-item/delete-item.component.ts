@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, Input, Output, EventEmitter } from "@angular/core";
 import { DocumentService, IDocument } from "./../../services/document.service";
 import { HelperService } from "./../../services/helper.service";
+import { FileService } from "./../../services/file.service";
 declare var jquery: any;
 declare var $: any;
 
@@ -15,7 +16,8 @@ export class DeleteItemComponent implements AfterViewInit {
 
   constructor(
     private documentService: DocumentService,
-    private helperService: HelperService
+    private helperService: HelperService,
+    private fileService: FileService
   ) {}
 
   ngAfterViewInit() {
@@ -28,6 +30,7 @@ export class DeleteItemComponent implements AfterViewInit {
     this.documentService.deleteContract(this.document.id)
       .toPromise()
       .then(() => {
+        this.fileService.deleteFile(this.document.file[0].filename).subscribe();
         this.helperService.updatePage(this.document);
       });
   }
