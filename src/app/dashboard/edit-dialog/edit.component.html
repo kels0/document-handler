@@ -11,6 +11,7 @@
         <div class="form-group">
           <label for="title">Name:</label>
           <input type="text" class="form-control" id="title" [(ngModel)]="editingDocument.name">
+          <div *ngIf="editingDocument.name.length === 0" class="alert alert-danger">You must include a name.</div>
         </div>
         <div class="form-group">
           <label for="documentType">Select document type:</label>
@@ -29,7 +30,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="resetDocument()" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="saveDocument()" data-dismiss="modal">Update</button>
+        <button type="button" class="btn btn-primary" (click)="saveDocument()" data-dismiss="modal" [disabled]="editingDocument.name.length === 0">Update</button>
       </div>
     </div>
   </div>
