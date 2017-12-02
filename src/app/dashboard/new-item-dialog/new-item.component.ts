@@ -1,8 +1,9 @@
-import { Component, Output, Input, EventEmitter, OnInit } from "@angular/core";
+import { Component, Output, Input, EventEmitter, OnInit, AfterViewInit } from "@angular/core";
 import { DocumentService, IDocument, IOption } from "../../services/document.service";
 import { FileService, IFile } from "../../services/file.service";
 import { HelperService } from "../../services/helper.service";
 import { Constants } from "../.././constants";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 declare var jquery: any;
 declare var $: any;
@@ -12,11 +13,8 @@ declare var $: any;
   templateUrl: "./new-item.component.html",
   styleUrls: ["./new-item.component.less"]
 })
-export class NewItemComponent implements OnInit {
-  public name: string;
-  public fileName: string;
-  public description: string;
-  public type: string;
+export class NewItemComponent implements OnInit, AfterViewInit {
+  public documentForm: FormGroup;
   public filesToUpload: Array<File> = [];
   @Output() closeModalEvent: EventEmitter<any> = new EventEmitter();
 
@@ -31,16 +29,25 @@ export class NewItemComponent implements OnInit {
     private helperService: HelperService,
     private documentService: DocumentService,
     private fileService: FileService,
-    private constants: Constants
+    private constants: Constants,
+    private formBuilder: FormBuilder
   ) {
-    this.type = this.options[0].value;
   }
 
   ngOnInit() {
+    this.documentForm = this.formBuilder.group({
+      "name": [null, Validators.required],
+      "fileName": [null, Validators.required],
+      "description": "",
+      "type": this.options[0].value
+    });
+  }
+
+  ngAfterViewInit() {
     $("input[type=file]").change((event) => {
       const files = event.target.files;
       this.filesToUpload = files;
-      this.fileName = files[0].name;
+      this.documentForm.controls["fileName"].setValue(files[0].name)
     });
 
     $("#addNewModal").on("hidden.bs.modal", () => {
@@ -48,7 +55,7 @@ export class NewItemComponent implements OnInit {
     });
   }
 
-  public saveDocument(): void {
+  public saveDocument(formDocument: IDocument): void {
     const formData: FormData = new FormData();
     const files = this.filesToUpload;
     for (let i = 0; i < files.length; i++) {
@@ -57,9 +64,9 @@ export class NewItemComponent implements OnInit {
 
     const document: IDocument = {
       id: this.helperService.generateId(),
-      type: this.type,
-      name: this.name,
-      description: this.description,
+      type: formDocument.type,
+      name: formDocument.name,
+      description: formDocument.description,
       file: null,
       createdDate: this.helperService.getDate()
     };
