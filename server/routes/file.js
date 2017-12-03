@@ -5,6 +5,7 @@ const router = express.Router();
 const request = require("request");
 const multer = require("multer");
 const fs = require('fs');
+const mime = require('mime-types');
 const pathToFolder = "public/uploads/";
 
 // storage
@@ -44,7 +45,12 @@ router.get("/:value", (req, res) => {
 
 // DELETE 
 router.delete("/:value", (req, res) => {
-  fs.unlink(pathToFolder + req.params.value);
+  var fileNames = req.params.value.split(",");
+  for (var i = 0; i <fileNames.length; i++) {
+    if (fileNames[i]) {
+      fs.unlink(pathToFolder + fileNames[i]);
+    }
+  }
   res.send("successfully removed file");
 })
 

@@ -47,7 +47,15 @@ export class NewItemComponent implements OnInit, AfterViewInit {
     $("input[type=file]").change((event) => {
       const files = event.target.files;
       this.filesToUpload = files;
-      this.documentForm.controls["fileName"].setValue(files[0].name)
+      let fileNames = "";
+      for (let i = 0; i < files.length; i++) {
+        let extraString = ", ";
+        if (i === files.length - 1) {
+          extraString = "";
+        }
+        fileNames += files[i].name + extraString;
+      }
+      this.documentForm.controls["fileName"].setValue(fileNames)
     });
 
     $("#addNewModal").on("hidden.bs.modal", () => {

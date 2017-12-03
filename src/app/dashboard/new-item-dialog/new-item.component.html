@@ -30,7 +30,7 @@
           <div class="input-group form-group" [ngClass]="{'has-error':!documentForm.controls['fileName'].valid && documentForm.controls['fileName'].touched}">
             <label class="input-group-btn">
               <span class="btn btn-primary">
-              Choose file <input type="file" name="file" style="display: none;">
+              Choose file <input type="file" name="file" style="display: none;" multiple>
               </span>
             </label>
             <input type="text" class="form-control" readonly

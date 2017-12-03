@@ -25,7 +25,7 @@ export class FileService {
     });
   }
 
-  public deleteFile(value: string): Observable<any> {
+  public deleteFiles(value: string): Observable<any> {
     return this.httpService.delete("file/" + value);
   }
 }

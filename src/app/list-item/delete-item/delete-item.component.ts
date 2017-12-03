@@ -30,7 +30,11 @@ export class DeleteItemComponent implements AfterViewInit {
     this.documentService.deleteContract(this.document.id)
       .toPromise()
       .then(() => {
-        this.fileService.deleteFile(this.document.file[0].filename).subscribe();
+        let fileNames = "";
+        this.document.file.forEach((file) => {
+          fileNames += file.filename + ",";
+        });
+        this.fileService.deleteFiles(fileNames).subscribe();
         this.helperService.updatePage(this.document);
       });
   }

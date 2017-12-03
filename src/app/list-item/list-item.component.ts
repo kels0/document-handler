@@ -27,7 +27,7 @@ export class ListItemComponent implements OnInit {
   }
 
   private getImage(): void {
-    const fileName = this.document.file[0].filename;
+    const fileName = this.document.file[0].filename; // preview only first image
     this.fileService.getFile(fileName).subscribe((file) => {
       this.file = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file.blob()));
     });

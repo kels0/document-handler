@@ -1,5 +1,7 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, Input, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter } from "@angular/core";
+import { FileService, IFile } from "../../services/file.service";
 import { IDocument } from "../../services/document.service";
+import { DomSanitizer } from "@angular/platform-browser";
 declare var jquery: any;
 declare var $: any;
 
@@ -8,16 +10,23 @@ declare var $: any;
   templateUrl: "./preview-document.component.html",
   styleUrls: ["./preview-document.component.less"]
 })
-export class PreviewDocumentComponent implements OnInit, OnDestroy, AfterViewInit {
+export class PreviewDocumentComponent implements OnInit, AfterViewInit {
   @Input() document: IDocument;
   @Input() file: any;
   @Output() closeModalEvent: EventEmitter<any> = new EventEmitter();
 
-  public fileName: string;
+  public images: any;
+  public files: IFile[];
+
+  constructor(
+    private fileService: FileService,
+    private sanitizer: DomSanitizer,
+  ) {}
 
   ngOnInit() {
     if (this.document) {
-      this.fileName = this.document.file[0].originalname;
+      this.files = this.document.file;
+      this.getImages();
     }
   }
   ngAfterViewInit() {
@@ -26,7 +35,19 @@ export class PreviewDocumentComponent implements OnInit, OnDestroy, AfterViewIni
     });
   }
 
-  ngOnDestroy(): void {
-    this.closeModalEvent.unsubscribe();
+  public openFile(fileName: string): void {
+    this.fileService.getFile(fileName).subscribe((file) => {
+      const url = URL.createObjectURL(file.blob());
+      window.open(url);
+    });
+  }
+
+  private getImages(): void {
+    this.images = [];
+    this.document.file.forEach((file) => {
+      this.fileService.getFile(file.filename).subscribe((file) => {
+        this.images.push(this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(file.blob())));
+      });
+    });
   }
 }
