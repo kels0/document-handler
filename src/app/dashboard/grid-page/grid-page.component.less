@@ -7,11 +7,18 @@
         background-color: lightsteelblue;
         font-size: large;
         font-weight: bold;
+        padding: .75rem 1.25rem;
+        border: 1px solid rgba(0,0,0,.125);
     }
 
     .document-container {
         height: 80%;
         max-height: 725px;
         overflow: auto;
+    }
+
+    //Issue with open modals with new Bootstrap
+    .list-group-item:hover { 
+        z-index: auto; 
     }
 }
