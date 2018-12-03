@@ -1,5 +1,16 @@
 
 <div class="list-group">
+  <div class="btn-group item-options" role="group" aria-label="options">
+    <button type="button" 
+      class="btn btn-secondary" 
+      (click)="showPreview = !showPreview"
+      data-toggle="modal" 
+      [attr.data-target]="'#view' + documentId"
+      [disabled]="!selectedDocument">
+        View Files
+      </button>
+    <button type="button" class="btn btn-secondary">Edit Item</button>
+  </div>
   <div class="row datagrid-info">
     <div class="col-md-1">
       #
@@ -27,8 +38,9 @@
     </div>
   </div>
   <div class="document-container">
-    <div class="list-group-item" *ngFor="let document of documents; let i = index">
+    <div class="list-group-item row-item" id="{{document.id}}" *ngFor="let document of documents; let i = index" (click)="test(document)">
         <app-list-item [document]="document" [index]="i"></app-list-item>
     </div>
   </div>
 </div>
+<app-preview-document *ngIf="showPreview" [document]="selectedDocument" (closeModalEvent)="showPreview = !showPreview"></app-preview-document>

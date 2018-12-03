@@ -12,10 +12,10 @@ declare var $: any;
 })
 export class PreviewDocumentComponent implements OnInit, AfterViewInit {
   @Input() document: IDocument;
-  @Input() file: any;
   @Output() closeModalEvent: EventEmitter<any> = new EventEmitter();
 
   public images: any;
+  public documentId = "";
   public files: IFile[];
 
   constructor(
@@ -26,6 +26,7 @@ export class PreviewDocumentComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     if (this.document) {
       this.files = this.document.file;
+      this.documentId = this.document.id;
       this.getImages();
     }
   }

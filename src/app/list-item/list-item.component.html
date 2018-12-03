@@ -24,14 +24,10 @@
       <button type="button" class="btn btn-success" (click)="showEdit = !showEdit" data-toggle="modal" [attr.data-target]="'#edit' + document.id">
           Edit
       </button>
-      <button type="button" class="btn btn-success" (click)="showPreview = !showPreview" data-toggle="modal" [attr.data-target]="'#view' + document.id">
-          View
-      </button>
       <button type="button" class="btn btn-warning" (click)="showDelete = !showDelete" data-toggle="modal" [attr.data-target]="'#delete' + document.id">
           Delete
       </button>
     </div>
 </div>
-<app-preview-document *ngIf="showPreview" [document]="document" (closeModalEvent)="showPreview = !showPreview" [file]="file"></app-preview-document>
 <app-edit *ngIf="showEdit" [document]="document" (closeModalEvent)="showEdit = !showEdit"></app-edit>
 <app-delete-item *ngIf="showDelete" [document]="document" (closeModalEvent)="showDelete = !showDelete"></app-delete-item>
