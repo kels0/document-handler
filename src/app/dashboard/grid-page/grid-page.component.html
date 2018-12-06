@@ -9,7 +9,14 @@
       [disabled]="!selectedDocument">
         View Files
       </button>
-    <button type="button" class="btn btn-secondary">Edit Item</button>
+    <button type="button" 
+      class="btn btn-secondary" 
+      (click)="showEdit = !showEdit" 
+      data-toggle="modal" 
+      [attr.data-target]="'#edit' + documentId"
+      [disabled]="!selectedDocument">
+        Edit item
+      </button>
   </div>
   <div class="row datagrid-info">
     <div class="col-md-1">
@@ -44,3 +51,5 @@
   </div>
 </div>
 <app-preview-document *ngIf="showPreview" [document]="selectedDocument" (closeModalEvent)="showPreview = !showPreview"></app-preview-document>
+<app-edit *ngIf="showEdit" [document]="selectedDocument" (closeModalEvent)="showEdit = !showEdit"></app-edit>
+
