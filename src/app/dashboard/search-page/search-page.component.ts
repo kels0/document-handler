@@ -1,7 +1,8 @@
-import { Component, AfterViewInit } from "@angular/core";
+import { Component, AfterViewInit, ViewChild } from "@angular/core";
 import { DocumentService, IDocument, IOption } from "../.././services/document.service";
 import { Constants } from "../.././constants";
 import { trigger, state, style, transition, animate, keyframes } from "@angular/animations";
+import { ContractPageComponent } from "../grid-page/grid-page.component";
 import "rxjs/add/operator/debounceTime";
 import "rxjs/add/operator/distinctUntilChanged";
 declare var jquery: any;
@@ -21,7 +22,7 @@ declare var $: any;
       })),
       transition("down => up", animate("250ms")),
     ])
-  ]
+  ],
 })
 export class SearchPageComponent implements AfterViewInit {
   private static ALL = ".*";
@@ -29,6 +30,8 @@ export class SearchPageComponent implements AfterViewInit {
   public searchString: string;
   public type: string;
   public documents: IDocument[] = [];
+  @ViewChild(ContractPageComponent) child: ContractPageComponent;
+
 
   public options: IOption[] = [
     { name: "All", value: SearchPageComponent.ALL },
@@ -65,6 +68,9 @@ export class SearchPageComponent implements AfterViewInit {
       (documents) => {
         this.documents = documents.json();
         this.animateMe();
+        if (this.child) { // On first search grid is undefined
+          this.child.refreshGrid();
+        }
       });
   }
 

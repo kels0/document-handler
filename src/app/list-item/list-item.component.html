@@ -14,16 +14,10 @@
     <div class="col-md-3">
       {{document.description}}
     </div>
-    <div class="col-md-1">
+    <div class="col-md-2">
       {{createdDate}}
     </div>
-    <div class="col-md-1">
+    <div class="col-md-2">
       {{document.type}}
     </div>
-    <div class="col-md-2">
-      <button type="button" class="btn btn-warning" (click)="showDelete = !showDelete" data-toggle="modal" [attr.data-target]="'#delete' + document.id">
-          Delete
-      </button>
-    </div>
 </div>
-<app-delete-item *ngIf="showDelete" [document]="document" (closeModalEvent)="showDelete = !showDelete"></app-delete-item>

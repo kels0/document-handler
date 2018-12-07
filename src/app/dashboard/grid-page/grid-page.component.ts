@@ -15,7 +15,13 @@ export class ContractPageComponent {
   public documentId = "";
   @Input() documents: IDocument[];
 
-  public test(document: IDocument): void {
+
+  public refreshGrid(): void {
+    this.selectedDocument = null;
+    this.documentId = "";
+  }
+
+  public selectItem(document: IDocument): void {
     $(".selected.row-item").removeClass("selected");
     $("#" + document.id).addClass("selected");
 
