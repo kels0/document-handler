@@ -4,11 +4,17 @@ import { IDocument } from "./document.service";
 
 @Injectable()
 export class HelperService {
-  private typeSource = new BehaviorSubject<IDocument>(null);
-  public currentType = this.typeSource.asObservable();
+  private documentUpdatedSource = new BehaviorSubject<IDocument>(null);
+  private documentDeletedSource = new BehaviorSubject<IDocument>(null);
+  public updatedDocument = this.documentUpdatedSource.asObservable();
+  public deletedDocument = this.documentDeletedSource.asObservable();
 
-  public updatePage(document: IDocument) {
-    this.typeSource.next(document)
+  public updateDocuments(document: IDocument) {
+    this.documentUpdatedSource.next(document)
+  }
+
+  public deleteDocument(document: IDocument) {
+    this.documentDeletedSource.next(document);
   }
 
   // More UI friendly time

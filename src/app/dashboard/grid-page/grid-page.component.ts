@@ -9,7 +9,7 @@ declare var $: any;
   templateUrl: "./grid-page.component.html",
   styleUrls: ["./grid-page.component.less"]
 })
-export class ContractPageComponent {
+export class GridPageComponent {
 
   public selectedDocument: IDocument;
   public documentId = "";

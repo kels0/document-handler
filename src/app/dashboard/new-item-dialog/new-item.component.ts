@@ -88,7 +88,7 @@ export class NewItemComponent implements OnInit, AfterViewInit {
     this.documentService.addContract(document)
       .toPromise()
       .then(() => {
-        this.helperService.updatePage(document);
+        this.helperService.updateDocuments(document);
       });
   }
 }

@@ -34,8 +34,9 @@ export class DeleteItemComponent implements AfterViewInit {
         this.document.file.forEach((file) => {
           fileNames += file.filename + ",";
         });
-        this.fileService.deleteFiles(fileNames).subscribe();
-        this.helperService.updatePage(this.document);
+        this.fileService.deleteFiles(fileNames).subscribe(() => {
+          this.helperService.deleteDocument(this.document);
+        });
       });
   }
 }
