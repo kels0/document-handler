@@ -3,7 +3,9 @@
       {{index + 1}}
     </div>
     <div class="col-md-1">
-      <img class="img-thumbnail thumbnail" [src]="file">
+      <a class="btn" data-toggle="popover" id="{{document.id}}" data-full="file">
+        <span class="fas fa-search-plus fa-2x"></span>
+      </a>
     </div>
     <div class="col-md-1">
       <p>{{document.file.length}}</p>
@@ -21,3 +23,4 @@
       {{document.type}}
     </div>
 </div>
+

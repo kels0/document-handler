@@ -1,17 +1,19 @@
-import { Component, OnInit, Input, Output, EventEmitter} from "@angular/core";
+import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter } from "@angular/core";
 import { IDocument } from "./../services/document.service"
 import { HelperService } from "../services/helper.service";
 import { FileService } from "../services/file.service";
-import { DomSanitizer } from "@angular/platform-browser";
+import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
+declare var jquery: any;
+declare var $: any;
 
 @Component({
   selector: "app-list-item",
   templateUrl: "./list-item.component.html",
   styleUrls: ["./list-item.component.less"]
 })
-export class ListItemComponent implements OnInit {
+export class ListItemComponent implements OnInit, AfterViewInit {
   public createdDate: string;
-  public file: any;
+  public file: SafeUrl;
   @Input() index: number;
   @Input() document: IDocument;
 
@@ -20,6 +22,18 @@ export class ListItemComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private fileService: FileService
   ) { }
+
+  ngAfterViewInit() {
+    $("[data-toggle=popover]", "#" + this.document.id).popover({
+        html: true,
+        trigger: "hover",
+        content: () => {
+          const url =
+            `<img class="img-fluid" src="${this.file[Object.keys(this.file)[0]]}" width="150" height="150"/>`;
+          return url;
+        }
+      });
+  }
 
   ngOnInit() {
     this.createdDate = this.helperService.convertToYMD(this.document.createdDate);
